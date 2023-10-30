@@ -68,6 +68,7 @@
                                     </strong>
                                 @enderror
                             </div>
+
                             <table class="table sm table-bordered table-striped dt-responsive" style="width: 100%">
                                 <thead>
                                     <tr>

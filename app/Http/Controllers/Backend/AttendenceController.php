@@ -12,43 +12,97 @@ class AttendenceController extends Controller
 {
     public function index()
     {
-        $attendences = Attendence::select('date')->groupBy('date')->orderBy('date', 'DESC')->get();
 
-        return view('backend.attendence.index', [
-            'attendences'      => $attendences,
-        ]);
+        try {
+            $attendances = Attendence::select('date')->groupBy('date')->orderBy('date', 'DESC')->get();
+
+            return view('backend.attendence.index', [
+                'attendances'      => $attendances,
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function create()
     {
-        $employees = Employee::all();
+        try {
+            $employees = Employee::all();
 
-        return view('backend.attendence.create', [
-            'employees'     => $employees,
-        ]);
+            return view('backend.attendence.create', [
+                'employees'     => $employees,
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     public function store(Request $request)
     {
-        $employee_count = count($request->employee_id);
 
 
-        if (Attendence::where('date', $request->date)->exists()) {
+        try {
+            $employeeCount = count($request->employee_id);
 
-            $notification = array(
-                'message'       => 'Already submitted',
-                'alert-type'    => 'warning',
-            );
 
-            return back()->with($notification);
+            if (Attendence::where('date', $request->date)->exists()) {
+
+                $notification = array(
+                    'message'       => 'Already Exists',
+                    'alert-type'    => 'warning',
+                );
+
+                return back()->with($notification);
+            } else {
+                for ($i = 0; $i < $employeeCount; $i++) {
+                    $status = 'status' . $i;
+
+                    Attendence::create([
+                        'employee_id'          => $request->employee_id[$i],
+                        'date'                 => $request->date,
+                        'status'               => $request->$status,
+                        'created_at'           => Carbon::now(),
+                    ]);
+                }
+
+                $notification = array(
+                    'message'       => 'Attendance Created Successfully',
+                    'alert-type'    => 'success',
+                );
+
+                return back()->with($notification);
+            }
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
+    }
 
-        // else
-        else {
+
+    public function edit($date)
+    {
+        try {
+            $attendences = Attendence::where('date', $date)->get();
+
+            return view('backend.attendence.edit', [
+                'attendences' => $attendences,
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+    public function update(Request $request)
+    {
+        try {
+
+            $employee_count = count($request->employee_id);
+
             for ($i = 0; $i < $employee_count; $i++) {
                 $status = 'status' . $i;
 
-                Attendence::create([
+
+                Attendence::find($request->attendence_id[$i])->update([
                     'employee_id'          => $request->employee_id[$i],
                     'date'                 => $request->date,
                     'status'               => $request->$status,
@@ -57,55 +111,27 @@ class AttendenceController extends Controller
             }
 
             $notification = array(
-                'message'       => 'Attendence Submitted',
+                'message'       => 'Attendence Updated',
                 'alert-type'    => 'success',
             );
 
             return back()->with($notification);
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
-    }
-
-
-    public function edit($date)
-    {
-        $attendences = Attendence::where('date', $date)->get();
-
-        return view('backend.attendence.edit', [
-            'attendences' => $attendences,
-        ]);
-    }
-
-
-    public function update(Request $request)
-    {
-        $employee_count = count($request->employee_id);
-
-        for ($i = 0; $i < $employee_count; $i++) {
-            $status = 'status' . $i;
-
-            Attendence::find($request->attendence_id[$i])->update([
-                'employee_id'          => $request->employee_id[$i],
-                'date'                 => $request->date,
-                'status'               => $request->$status,
-                'created_at'           => Carbon::now(),
-            ]);
-        }
-
-        $notification = array(
-            'message'       => 'Attendence Updated',
-            'alert-type'    => 'success',
-        );
-
-        return back()->with($notification);
     }
 
 
     public function view($date)
     {
-        $attendences = Attendence::where('date', $date)->get();
+        try {
+            $attendences = Attendence::where('date', $date)->get();
 
-        return view('backend.attendence.view', [
-            'attendences' => $attendences,
-        ]);
+            return view('backend.attendence.view', [
+                'attendences' => $attendences,
+            ]);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 }

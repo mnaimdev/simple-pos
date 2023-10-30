@@ -1,17 +1,74 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+@extends('admin')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{ __("You're logged in!") }}
+@section('content')
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total Customer</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total Supplier</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Total Employee</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 my-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>This Year Expense</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>2</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 my-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>This Month Expense</h3>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <h3>2</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

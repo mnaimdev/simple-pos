@@ -32,17 +32,26 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($attendences as $sl => $attendence)
+                                {{-- @foreach ($attendences as $sl => $attendence)
                                     <tr>
 
 
 
                                         <td>{{ $sl + 1 }}</td>
                                         <td>{{ date('Y-m-d', strtotime($attendence->date)) }}</td>
+
+                                    </tr>
+                                @endforeach --}}
+
+                                @foreach ($attendances as $sl => $attendance)
+                                    <tr>
+                                        <td>{{ $sl + 1 }}</td>
+                                        <td>{{ $attendance->date }}</td>
+
                                         <td>
-                                            <a href=" {{ route('attendence.edit', $attendence->date) }}"
+                                            <a href=" {{ route('attendence.edit', $attendance->date) }}"
                                                 class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('attendence.view', $attendence->date) }}"
+                                            <a href="{{ route('attendence.view', $attendance->date) }}"
                                                 class="btn btn-info">View</a>
                                         </td>
                                     </tr>

@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('paid_amount')->nullable();
             $table->integer('due_amount')->nullable();
             $table->integer('advance_amount')->nullable();
+            $table->boolean('status')->default(0);
+            $table->string('advance_month')->nullable();
+            $table->string('advance_year')->nullable();
             $table->timestamps();
         });
     }

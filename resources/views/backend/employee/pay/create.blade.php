@@ -57,13 +57,25 @@
                                             Advance Salary
                                         </label>
 
-                                        @if (!empty($employees->rel_to_advance->amount))
+                                        @php
+                                            $advanceSalary = App\Models\EmployeeAdvanceSalary::where('employee_id', $employees->id)
+                                                ->where('year', Carbon\Carbon::now()->year)
+                                                ->first();
+                                        @endphp
+
+                                        @if (!empty($advanceSalary->amount))
                                             @php
-                                                $advance = $employees->rel_to_advance->amount;
+                                                $advance = $advanceSalary->amount;
+                                                $due = $employees->salary - $advance;
+                                                $advanceMonth = $advanceSalary->month;
+                                                $advanceYear = $advanceSalary->year;
                                             @endphp
                                         @else
                                             @php
                                                 $advance = 0;
+                                                $due = 0;
+                                                $advanceMonth = 0;
+                                                $advanceYear = 0;
                                             @endphp
                                         @endif
 
@@ -78,21 +90,13 @@
                                         <label>
                                             Due Amount
                                         </label>
-                                        @if (!empty($employees->rel_to_advance->amount))
-                                            @php
-                                                $salary = $employees->salary;
-                                                $advance = $employees->rel_to_advance->amount;
-                                                $due = $salary - $advance;
-                                            @endphp
-                                        @else
-                                            @php
-                                                $salary = $employees->salary;
-                                                $advance = 0;
-                                                $due = $salary - $advance;
-                                            @endphp
-                                        @endif
+
                                         <input type="text" class="form-control" name="due_amount"
                                             value="{{ $due }}" readonly>
+
+                                        <input type="hidden" name="advance_amount" value="{{ $advance }}">
+                                        <input type="hidden" name="advance_month" value="{{ $advanceMonth }}">
+                                        <input type="hidden" name="advance_year" value="{{ $advanceYear }}">
                                     </div>
                                 </div>
 
@@ -103,11 +107,6 @@
                             </div>
 
                     </div>
-
-
-
-
-
 
 
 

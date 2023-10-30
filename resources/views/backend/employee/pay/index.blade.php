@@ -50,6 +50,8 @@
                                             @endphp
 
 
+
+
                                             @if (!empty($advanceSalary->amount))
                                                 <span>{{ $advanceSalary->amount }}</span>
                                             @else
@@ -72,23 +74,22 @@
                                                 {{ $due }}
                                             @endif
 
-                                            {{-- @if (!empty($employee->rel_to_advance->amount))
-                                                @php
-                                                    $salary = $employee->salary;
-                                                    $advance = $employee->rel_to_advance->amount;
-                                                    $due = $salary - $advance;
-                                                    echo $due;
-                                                @endphp
-                                            @else
-                                                @php
-                                                    $due = $employee->salary;
-                                                    echo $due;
-                                                @endphp
-                                            @endif --}}
+
                                         </td>
                                         <td>
-                                            <a href="{{ route('pay.now', $employee->id) }}" class="btn btn-primary">Pay
-                                                Now</a>
+
+
+                                            @php
+                                                $status = App\Models\EmployeePaySalary::where('employee_id', $employee->id)->exists();
+                                            @endphp
+
+                                            @if (!empty($status))
+                                                <div class="badge badge-primary">paid</div>
+                                            @else
+                                                <a href="{{ route('pay.now', $employee->id) }}" class="btn btn-primary">Pay
+                                                    Now</a>
+                                            @endif
+
                                         </td>
 
                                     </tr>

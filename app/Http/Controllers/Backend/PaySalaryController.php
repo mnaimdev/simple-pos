@@ -50,7 +50,10 @@ class PaySalaryController extends Controller
                 'month'             => $request->month,
                 'paid_amount'       => $request->paid_amount,
                 'advance_amount'    => $request->advance_amount,
+                'advance_month'     => $request->advance_month,
+                'advance_year'      => $request->advance_year,
                 'due_amount'        => $request->due_amount,
+                'status'            => 1,
                 'created_at'        => Carbon::now(),
             ]);
 

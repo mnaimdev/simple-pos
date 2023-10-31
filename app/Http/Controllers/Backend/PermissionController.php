@@ -85,11 +85,11 @@ class PermissionController extends Controller
     function add_role_permission()
     {
         $roles = Role::all();
-        $group_names = User::getPermisionGroups();
+        $groupNames = User::getPermisionGroups();
 
         return view('backend.permission.add_role_permission', [
             'roles'             => $roles,
-            'group_names'       => $group_names,
+            'groupNames'       => $groupNames,
         ]);
     }
 
@@ -100,6 +100,8 @@ class PermissionController extends Controller
             'role_id'        => 'required',
             'permission_id'  => 'required',
         ]);
+
+
 
         $data = array();
 

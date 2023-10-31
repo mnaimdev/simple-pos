@@ -57,7 +57,7 @@
 
 
                             <div class="row">
-                                @foreach ($group_names as $group)
+                                @foreach ($groupNames as $group)
                                     <div class="col-lg-6">
                                         <div class="form-group mb-3 pl-4">
                                             <input type="checkbox" class="form-check-input" value="">
@@ -88,7 +88,6 @@
                                     </div>
                                 @endforeach
                             </div>
-
 
 
                             <div class="form-group">

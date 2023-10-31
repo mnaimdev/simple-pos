@@ -55,9 +55,9 @@
                                         </td>
                                         <td>
 
-                                            @forelse ($user->roles as $role)
+                                            @forelse ($user->getRoleNames() as $role)
                                                 <span class="badge badge-primary">
-                                                    {{ $role->name }}
+                                                    {{ $role }}
                                                 </span>
                                             @empty
                                                 <span>No Role</span>

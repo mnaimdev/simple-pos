@@ -10,7 +10,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3>2</h3>
+                            <h3>{{ $totalCustomer }}</h3>
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3>2</h3>
+                            <h3>{{ $totalSupplier }}</h3>
                         </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3>2</h3>
+                            <h3>{{ $totalEmployee }}</h3>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3>2</h3>
+                            <h3>{{ $yearlyExpense }} TK</h3>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="card-body">
                         <div>
-                            <h3>2</h3>
+                            <h3>{{ $monthlyExpense }} TK</h3>
                         </div>
                     </div>
                 </div>

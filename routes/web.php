@@ -13,8 +13,10 @@ use App\Http\Controllers\Backend\POSController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\SupplierController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Route;
 
 
@@ -23,9 +25,7 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('root');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +46,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/update/profile/password',  'update_password')->name('update.password');
 
         Route::get('/admin', 'admin')->name('admin');
+
         Route::get('/assign/role', 'assign_role')->name('assign.role');
         Route::post('/assign/role/store', 'assign_role_store')->name('assign.role.store');
 
